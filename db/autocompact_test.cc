@@ -73,8 +73,8 @@ void AutoCompactTest::DoReads(int n) {
   ASSERT_LEVELDB_OK(dbi->TEST_CompactMemTable());
 
   // Get initial measurement of the space we will be reading.
-  const int64_t initial_size = Size(Key(0), Key(n));
-  const int64_t initial_other_size = Size(Key(n), Key(kCount));
+  const uint64_t initial_size = Size(Key(0), Key(n));
+  const uint64_t initial_other_size = Size(Key(n), Key(kCount));
 
   // Read until size drops significantly.
   std::string limit_key = Key(n);
@@ -98,7 +98,7 @@ void AutoCompactTest::DoReads(int n) {
 
   // Verify that the size of the key space not touched by the reads
   // is pretty much unchanged.
-  const int64_t final_other_size = Size(Key(n), Key(kCount));
+  const uint64_t final_other_size = Size(Key(n), Key(kCount));
   ASSERT_LE(final_other_size, initial_other_size + 1048576);
   ASSERT_GE(final_other_size, initial_other_size / 5 - 1048576);
 }
