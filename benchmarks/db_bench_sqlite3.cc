@@ -137,7 +137,9 @@ class RandomGenerator {
   }
 
   Slice Generate(int len) {
-    if (pos_ + len > data_.size()) {
+    assert(len > 0);
+    assert(pos_ + len > 0);
+    if (((size_t) pos_ + len) > data_.size()) {
       pos_ = 0;
       assert(len < data_.size());
     }
